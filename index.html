@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeki Chat - Smart Assistant</title>
+    <title>زكي شات - مساعدك الذكي</title>
     <style>
         * {
             margin: 0;
@@ -18,19 +18,19 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 16px;
+            padding: 12px;
         }
 
         .container {
             background: #14141c;
-            border-radius: 24px;
-            max-width: 950px;
+            border-radius: 28px;
+            max-width: 900px;
             width: 100%;
-            height: 94vh;
+            height: 95vh;
             display: flex;
             flex-direction: column;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             overflow: hidden;
         }
 
@@ -52,13 +52,13 @@
         }
 
         .logo-icon {
-            font-size: 28px;
+            font-size: 32px;
             filter: drop-shadow(0 0 10px rgba(79, 172, 254, 0.3));
         }
 
         .header-title {
             color: #fff;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             -webkit-background-clip: text;
@@ -98,7 +98,7 @@
         .chat-area {
             flex: 1;
             overflow-y: auto;
-            padding: 20px 24px;
+            padding: 16px 20px;
             background: #0f0f17;
             scroll-behavior: smooth;
         }
@@ -118,15 +118,15 @@
 
         .message {
             display: flex;
-            gap: 14px;
-            padding: 14px 0;
-            animation: fadeSlide 0.25s ease;
+            gap: 12px;
+            padding: 12px 0;
+            animation: fadeSlide 0.3s ease;
         }
 
         @keyframes fadeSlide {
             from {
                 opacity: 0;
-                transform: translateY(12px);
+                transform: translateY(14px);
             }
             to {
                 opacity: 1;
@@ -135,13 +135,13 @@
         }
 
         .message-avatar {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 17px;
             flex-shrink: 0;
         }
 
@@ -160,7 +160,112 @@
             font-size: 15px;
             line-height: 1.7;
             word-wrap: break-word;
-            white-space: pre-wrap;
+        }
+
+        .message-content .text {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .message.user .message-content .text {
+            background: linear-gradient(135deg, rgba(16, 163, 127, 0.15), rgba(16, 163, 127, 0.05));
+            border-color: rgba(16, 163, 127, 0.1);
+        }
+
+        .image-container {
+            margin-top: 8px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-height: 420px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .image-source {
+            color: #4facfe;
+            font-size: 11px;
+            padding: 4px 12px;
+            background: rgba(79, 172, 254, 0.1);
+            border-bottom: 1px solid rgba(79, 172, 254, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .image-actions {
+            display: flex;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            flex-wrap: wrap;
+        }
+
+        .image-actions .btn-download {
+            background: rgba(79, 172, 254, 0.2);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            color: #4facfe;
+            padding: 4px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .image-actions .btn-download:hover {
+            background: rgba(79, 172, 254, 0.3);
+        }
+
+        .image-prompt {
+            color: #6e6f82;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #8e8ea0;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-action:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e5e7eb;
+        }
+
+        .btn-action:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
         }
 
         .welcome-msg {
@@ -169,36 +274,37 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            min-height: 280px;
+            min-height: 260px;
             color: #6e6f82;
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         .welcome-msg .big-icon {
-            font-size: 56px;
-            margin-bottom: 14px;
+            font-size: 64px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 30px rgba(79, 172, 254, 0.1));
         }
 
         .welcome-msg h2 {
             color: #e5e7eb;
             font-size: 24px;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .welcome-msg p {
             font-size: 14px;
-            max-width: 400px;
             color: #6e6f82;
+            max-width: 350px;
         }
 
         .typing-indicator {
             display: none;
-            padding: 12px 0;
-            gap: 14px;
+            padding: 10px 0;
+            gap: 12px;
             align-items: center;
-            margin: 0 24px;
+            margin: 0 20px;
         }
 
         .typing-indicator.active {
@@ -215,6 +321,7 @@
             justify-content: center;
             font-size: 16px;
             flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.15);
         }
 
         .typing-dots {
@@ -224,8 +331,8 @@
         }
 
         .typing-dots span {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             background: #4a4a5a;
             border-radius: 50%;
             animation: typingBounce 1.3s infinite both;
@@ -255,24 +362,25 @@
         .input-area {
             background: rgba(15, 15, 23, 0.95);
             backdrop-filter: blur(20px);
-            padding: 14px 24px 20px;
+            padding: 12px 20px 18px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             flex-shrink: 0;
         }
 
         .input-wrapper {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.04);
-            border-radius: 14px;
-            padding: 6px 8px 6px 16px;
+            border-radius: 16px;
+            padding: 4px 6px 4px 16px;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
         }
 
         .input-wrapper:focus-within {
             border-color: rgba(79, 172, 254, 0.3);
             box-shadow: 0 0 30px rgba(79, 172, 254, 0.05);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         #userInput {
@@ -294,7 +402,7 @@
 
         .btn-group {
             display: flex;
-            gap: 4px;
+            gap: 2px;
             align-items: center;
         }
 
@@ -302,11 +410,12 @@
             background: transparent;
             border: none;
             color: #4a4a5a;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
             padding: 8px 10px;
-            border-radius: 10px;
+            border-radius: 12px;
             transition: all 0.2s;
+            position: relative;
         }
 
         .btn-icon:hover:not(:disabled) {
@@ -323,7 +432,7 @@
             background: linear-gradient(135deg, #4facfe, #3b82f6);
             color: #fff;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 10px 22px;
             font-size: 14px;
             font-weight: 600;
@@ -346,37 +455,6 @@
             transform: none;
         }
 
-        .lang-selector {
-            display: flex;
-            gap: 4px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 8px;
-            padding: 2px;
-            margin-top: 10px;
-            align-self: flex-start;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: #4a4a5a;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .lang-btn.active {
-            background: rgba(79, 172, 254, 0.15);
-            color: #4facfe;
-        }
-
-        .lang-btn:hover:not(.active) {
-            color: #8e8ea0;
-        }
-
         @media (max-width: 640px) {
             body {
                 padding: 0;
@@ -384,15 +462,16 @@
             .container {
                 height: 100vh;
                 border-radius: 0;
+                border: none;
             }
             .header {
-                padding: 12px 16px;
+                padding: 10px 16px;
             }
             .header-title {
-                font-size: 17px;
+                font-size: 18px;
             }
             .chat-area {
-                padding: 12px 16px;
+                padding: 10px 14px;
             }
             .message {
                 gap: 10px;
@@ -406,11 +485,14 @@
             .message-content {
                 font-size: 14px;
             }
+            .message-content .text {
+                padding: 8px 12px;
+            }
             .input-area {
-                padding: 10px 16px 14px;
+                padding: 10px 14px 14px;
             }
             .input-wrapper {
-                padding: 4px 6px 4px 12px;
+                padding: 4px 4px 4px 12px;
             }
             #userInput {
                 font-size: 14px;
@@ -420,14 +502,26 @@
                 padding: 8px 16px;
                 font-size: 13px;
             }
+            .btn-icon {
+                font-size: 18px;
+                padding: 6px 8px;
+            }
             .welcome-msg .big-icon {
-                font-size: 40px;
+                font-size: 44px;
             }
             .welcome-msg h2 {
                 font-size: 20px;
             }
-            .typing-indicator {
-                margin: 0 16px;
+            .image-container img {
+                max-height: 280px;
+            }
+            .image-actions {
+                gap: 4px;
+                padding: 6px 10px;
+            }
+            .image-actions .btn-download {
+                font-size: 11px;
+                padding: 3px 10px;
             }
         }
 
@@ -448,19 +542,19 @@
         <div class="header">
             <div class="header-left">
                 <span class="logo-icon">🧠</span>
-                <span class="header-title">Zeki Chat</span>
+                <span class="header-title">زكي شات</span>
             </div>
             <div class="header-status">
                 <span class="status-dot"></span>
-                <span>Ready</span>
+                <span>جاهز</span>
             </div>
         </div>
 
         <div class="chat-area" id="chatArea">
             <div class="welcome-msg" id="welcomeMsg">
                 <span class="big-icon">👋</span>
-                <h2>Welcome to Zeki Chat</h2>
-                <p>Ask me anything and I'll answer in Arabic 🚀</p>
+                <h2>أهلاً بك في زكي شات</h2>
+                <p>⌨️ اكتب · 🖼️ صور من Pinterest أو توليد</p>
             </div>
         </div>
 
@@ -475,21 +569,15 @@
 
         <div class="input-area">
             <div class="input-wrapper">
-                <input type="text" id="userInput" placeholder="Type your message..." />
+                <input type="text" id="userInput" placeholder="اكتب رسالتك..." />
                 <div class="btn-group">
-                    <button class="btn-icon" id="clearBtn" title="Clear chat">
-                        🗑️
-                    </button>
+                    <button class="btn-icon" id="imageBtn" title="توليد صورة">🖼️</button>
+                    <button class="btn-icon" id="clearBtn" title="مسح المحادثة">🗑️</button>
                     <button class="btn-send" id="sendBtn">
-                        <span>Send</span>
+                        <span>إرسال</span>
                         <span>➤</span>
                     </button>
                 </div>
-            </div>
-
-            <div class="lang-selector">
-                <button class="lang-btn active" data-lang="ar">🇸🇦 عربي</button>
-                <button class="lang-btn" data-lang="en">🇬🇧 English</button>
             </div>
         </div>
 
@@ -497,37 +585,108 @@
 
     <script>
         // ================================================================
-        //  🧠  Zeki Chat - شغال مع Groq API (نماذج مدعومة)
-        //  🔑 المفتاح مضمّن - ما يطلب منك شيء
+        //  🧠  زكي شات - Groq للمحادثة + Pinterest + Agnes للصور
         // ================================================================
 
-        // ---- Elements ----
+        // ---- العناصر ----
         const chatArea = document.getElementById('chatArea');
         const welcomeMsg = document.getElementById('welcomeMsg');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
+        const imageBtn = document.getElementById('imageBtn');
         const clearBtn = document.getElementById('clearBtn');
         const typingIndicator = document.getElementById('typingIndicator');
-        const langBtns = document.querySelectorAll('.lang-btn');
 
-        // ---- Groq API Settings (نماذج مدعومة حالياً) ----
-        const API_KEY = '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';
-        const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-        
-        // ✅ النماذج المدعومة حالياً (اختار واحد):
-        // 1. 'llama-3.3-70b-versatile' - الأقوى (70B)
-        // 2. 'llama-3.1-8b-instant' - الأسرع (8B)
-        const MODEL = 'llama-3.3-70b-versatile'; 
+        // ---- مفاتيح API ----
+        const GROQ_API_KEY = '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';
+        const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+        const GROQ_MODEL = 'llama-3.3-70b-versatile';
+
+        const AGNES_API_KEY = 'sk-oP60rzoFwCu5HkTpdLjDXX8IjNKgJP9Xu38i00cvkbo1W9US';
+        const AGNES_IMAGE_URL = 'https://apihub.agnes-ai.com/v1/images/generations';
 
         let isProcessing = false;
-        let currentLang = 'ar';
 
-        // ---- Add Message ----
-        function addMessage(type, content) {
+        // ================================================================
+        //  🔍  البحث في Pinterest (مجاني)
+        // ================================================================
+        async function searchPinterest(query) {
+            try {
+                // نستخدم واجهة بحث مجانية
+                const url = `https://pinterest-scraper-api.vercel.app/search?q=${encodeURIComponent(query)}&limit=5`;
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.results && data.results.length > 0) {
+                    // نرجع أول صورة موجودة
+                    return {
+                        found: true,
+                        imageUrl: data.results[0].images.orig || data.results[0].imageUrl,
+                        source: 'Pinterest',
+                        title: data.results[0].title || 'صورة من Pinterest'
+                    };
+                }
+                return { found: false };
+            } catch (error) {
+                console.error('❌ خطأ في البحث في Pinterest:', error);
+                return { found: false, error: error.message };
+            }
+        }
+
+        // ================================================================
+        //  🖼️  توليد الصور باستخدام Agnes AI
+        // ================================================================
+        async function generateImage(prompt) {
+            try {
+                const response = await fetch(AGNES_IMAGE_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${AGNES_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: 'agnes-image-2.1-flash',
+                        prompt: prompt,
+                        size: '1024x1024'
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json().catch(() => ({}));
+                    throw new Error(error.error?.message || `HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                const imageUrl = data?.data?.[0]?.url;
+
+                if (!imageUrl) {
+                    throw new Error('مافي رابط صورة في الرد');
+                }
+
+                return {
+                    found: true,
+                    imageUrl: imageUrl,
+                    source: 'Agnes AI',
+                    title: 'تم التوليد بواسطة الذكاء الاصطناعي'
+                };
+            } catch (error) {
+                console.error('❌ خطأ في توليد الصورة:', error);
+                throw error;
+            }
+        }
+
+        // ================================================================
+        //  📨  عرض الرسائل
+        // ================================================================
+        function addMessage(type, content, isImage = false, imageData = null) {
             if (welcomeMsg) welcomeMsg.style.display = 'none';
 
             const messageDiv = document.createElement('div');
-            messageDiv.className = 'message';
+            messageDiv.className = `message ${type}`;
 
             const avatar = document.createElement('div');
             avatar.className = `message-avatar ${type}`;
@@ -535,7 +694,95 @@
 
             const contentDiv = document.createElement('div');
             contentDiv.className = 'message-content';
-            contentDiv.innerHTML = content;
+
+            if (isImage && imageData) {
+                const container = document.createElement('div');
+                container.className = 'image-container';
+
+                // مصدر الصورة
+                const sourceDiv = document.createElement('div');
+                sourceDiv.className = 'image-source';
+                const sourceIcon = imageData.source === 'Pinterest' ? '📌' : '🧠';
+                sourceDiv.innerHTML = `${sourceIcon} المصدر: ${imageData.source}`;
+                container.appendChild(sourceDiv);
+
+                // الصورة
+                const img = document.createElement('img');
+                img.src = imageData.imageUrl;
+                img.alt = 'الصورة';
+                img.loading = 'lazy';
+                img.style.opacity = '0';
+                img.onload = () => { img.style.opacity = '1'; };
+                img.onerror = () => {
+                    container.innerHTML = `
+                        <div style="padding:30px;text-align:center;color:#6e6f82;">
+                            ❌ فشل تحميل الصورة
+                        </div>
+                    `;
+                };
+                container.appendChild(img);
+
+                // أزرار الإجراءات
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'image-actions';
+
+                const downloadBtn = document.createElement('button');
+                downloadBtn.className = 'btn-download';
+                downloadBtn.innerHTML = '⬇️ تحميل الصورة';
+                downloadBtn.onclick = () => {
+                    const link = document.createElement('a');
+                    link.href = imageData.imageUrl;
+                    link.download = `zeki_image_${Date.now()}.jpg`;
+                    link.target = '_blank';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                };
+
+                const openBtn = document.createElement('button');
+                openBtn.className = 'btn-download';
+                openBtn.innerHTML = '🔗 فتح في تبويب جديد';
+                openBtn.onclick = () => {
+                    window.open(imageData.imageUrl, '_blank');
+                };
+
+                actionsDiv.appendChild(downloadBtn);
+                actionsDiv.appendChild(openBtn);
+                container.appendChild(actionsDiv);
+
+                // النص الوصفي
+                const promptText = document.createElement('div');
+                promptText.className = 'image-prompt';
+                promptText.textContent = `🖼️ ${imageData.title || 'صورة'}`;
+
+                contentDiv.appendChild(container);
+                contentDiv.appendChild(promptText);
+
+            } else {
+                // عرض النص
+                const textDiv = document.createElement('div');
+                textDiv.className = 'text';
+                textDiv.innerHTML = content;
+                contentDiv.appendChild(textDiv);
+
+                if (type === 'bot') {
+                    const actions = document.createElement('div');
+                    actions.className = 'message-actions';
+
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'btn-action';
+                    copyBtn.innerHTML = '📋 نسخ';
+                    copyBtn.onclick = () => {
+                        const txt = textDiv.textContent || textDiv.innerText;
+                        navigator.clipboard?.writeText(txt);
+                        copyBtn.innerHTML = '✅ تم!';
+                        setTimeout(() => copyBtn.innerHTML = '📋 نسخ', 2000);
+                    };
+
+                    actions.appendChild(copyBtn);
+                    contentDiv.appendChild(actions);
+                }
+            }
 
             messageDiv.appendChild(avatar);
             messageDiv.appendChild(contentDiv);
@@ -544,70 +791,59 @@
             chatArea.scrollTop = chatArea.scrollHeight;
         }
 
-        // ---- Clear Chat ----
         function clearChat() {
-            const messages = chatArea.querySelectorAll('.message');
-            messages.forEach(msg => msg.remove());
+            document.querySelectorAll('.message').forEach(el => el.remove());
             if (welcomeMsg) welcomeMsg.style.display = 'flex';
         }
 
-        // ---- Call Groq API ----
-        async function callGroqAPI(text, lang) {
-            const systemPrompt = lang === 'ar' ?
-                'أنت مساعد ذكي اسمك زكي. دائماً ترد باللغة العربية الفصحى.' :
-                'You are a smart assistant named Zeki. Always respond in English.';
+        // ================================================================
+        //  🧠  الاتصال بـ Groq (للمحادثة)
+        // ================================================================
+        async function callGroq(prompt) {
+            const systemPrompt =
+                'أنت مساعد ذكي اسمك "زكي". ترد دائماً باللغة العربية الفصحى. ساعد المستخدم في أي سؤال.';
 
-            const payload = {
-                model: MODEL,
-                messages: [
-                    { role: 'system', content: systemPrompt },
-                    { role: 'user', content: text }
-                ],
-                max_tokens: 800,
-                temperature: 0.7,
-                stream: false
-            };
-
-            const response = await fetch(API_URL, {
+            const res = await fetch(GROQ_API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${API_KEY}`
+                    'Authorization': `Bearer ${GROQ_API_KEY}`
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({
+                    model: GROQ_MODEL,
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: prompt }
+                    ],
+                    max_tokens: 800,
+                    temperature: 0.7
+                })
             });
 
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                let errMsg = `Error ${response.status}`;
-                if (errorData.error?.message) {
-                    errMsg = errorData.error.message;
-                }
-                throw new Error(errMsg);
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                throw new Error(err.error?.message || `HTTP ${res.status}`);
             }
 
-            const data = await response.json();
-            const textResponse = data?.choices?.[0]?.message?.content;
-
-            if (!textResponse) {
-                throw new Error('No response generated.');
-            }
-
-            return textResponse;
+            const data = await res.json();
+            const reply = data?.choices?.[0]?.message?.content;
+            if (!reply) throw new Error('لم أستطع توليد رد');
+            return reply;
         }
 
-        // ---- Send Message ----
+        // ================================================================
+        //  🚀  إرسال الرسالة
+        // ================================================================
         async function sendMessage() {
             const text = userInput.value.trim();
             if (!text) {
                 userInput.style.borderColor = '#f87171';
-                setTimeout(() => {
-                    userInput.style.borderColor = 'transparent';
-                }, 800);
+                setTimeout(() => userInput.style.borderColor = 'transparent', 800);
                 return;
             }
-
             if (isProcessing) return;
+
+            const isImageRequest = /صوره|صورة|ارسم|رسم|توليد|انشاء|image|picture|draw|generate|create/i.test(text);
 
             addMessage('user', text);
             userInput.value = '';
@@ -616,86 +852,110 @@
 
             isProcessing = true;
             sendBtn.disabled = true;
+            imageBtn.disabled = true;
             typingIndicator.classList.add('active');
 
             try {
-                const response = await callGroqAPI(text, currentLang);
-                addMessage('bot', response);
-            } catch (error) {
-                console.error('❌ Error:', error);
-                let errorMsg = '❌ عذراً، حدث خطأ.';
-                if (error.message.includes('rate') || error.message.includes('limit')) {
-                    errorMsg = '⚠️ تجاوزت حد الطلبات (30/دقيقة). انتظر دقيقة وحاول مرة أخرى.';
-                } else if (error.message.includes('API key') || error.message.includes('Invalid')) {
-                    errorMsg = '❌ مفتاح API غير صالح. يرجى التحقق منه.';
+                if (isImageRequest) {
+                    // 1. نبحث في Pinterest
+                    const pinterestResult = await searchPinterest(text);
+
+                    if (pinterestResult.found) {
+                        // الصورة موجودة في Pinterest
+                        addMessage('bot', '🔍 وجدت هذه الصورة على Pinterest', true, {
+                            imageUrl: pinterestResult.imageUrl,
+                            source: 'Pinterest',
+                            title: pinterestResult.title || 'صورة من Pinterest'
+                        });
+                    } else {
+                        // 2. مش موجودة في Pinterest → نولدها بـ Agnes
+                        const agnesResult = await generateImage(text);
+                        addMessage('bot', '💡 لم أجدها على Pinterest، قمت بتوليدها لك', true, {
+                            imageUrl: agnesResult.imageUrl,
+                            source: 'Agnes AI (تم التوليد)',
+                            title: text
+                        });
+                    }
                 } else {
-                    errorMsg = `❌ ${error.message}`;
+                    // محادثة عادية
+                    const reply = await callGroq(text);
+                    addMessage('bot', reply);
                 }
-                addMessage('bot', errorMsg);
+            } catch (err) {
+                console.error('❌ خطأ:', err);
+                let msg = '❌ عذراً، حدث خطأ.';
+                if (err.message.includes('rate')) msg = '⚠️ تجاوزت حد الطلبات. انتظر دقيقة وحاول مرة أخرى.';
+                else if (err.message.includes('API key')) msg = '❌ مشكلة في المفتاح. حاول مرة أخرى.';
+                else msg = `❌ ${err.message}`;
+
+                // لو فشل التوليد، نحاول نرجع صورة بديلة من Pinterest
+                if (isImageRequest) {
+                    try {
+                        const fallback = await searchPinterest('طبيعة');
+                        if (fallback.found) {
+                            addMessage('bot', '⚠️ حدث خطأ في التوليد، لكن وجدت هذه الصورة كبديل', true, {
+                                imageUrl: fallback.imageUrl,
+                                source: 'Pinterest (بديل)',
+                                title: 'صورة بديلة'
+                            });
+                            return;
+                        }
+                    } catch (e) { /* نتجاهل */ }
+                }
+
+                addMessage('bot', msg);
             } finally {
                 isProcessing = false;
                 sendBtn.disabled = false;
+                imageBtn.disabled = false;
                 typingIndicator.classList.remove('active');
             }
         }
 
-        // ---- Language Selector ----
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                langBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentLang = this.dataset.lang;
-                userInput.placeholder = currentLang === 'ar' ?
-                    'اكتب رسالتك...' :
-                    'Type your message...';
-                if (welcomeMsg.style.display !== 'none') {
-                    const h2 = welcomeMsg.querySelector('h2');
-                    const p = welcomeMsg.querySelector('p');
-                    if (currentLang === 'ar') {
-                        h2.textContent = 'مرحباً بك في ذكي شات';
-                        p.textContent = 'اسألني أي شيء وسأجيبك بالعربية 🚀';
-                    } else {
-                        h2.textContent = 'Welcome to Zeki Chat';
-                        p.textContent = "Ask me anything and I'll answer in English 🚀";
-                    }
-                }
-            });
-        });
-
-        // ---- Events ----
+        // ================================================================
+        //  🎯  الأحداث
+        // ================================================================
         function init() {
-            sendBtn.addEventListener('click', function(e) {
+            sendBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 sendMessage();
             });
 
-            userInput.addEventListener('keydown', function(e) {
+            userInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
                     sendMessage();
                 }
             });
 
-            clearBtn.addEventListener('click', function(e) {
+            imageBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isProcessing) return;
+                const prompt = prompt('📝 اكتب وصف الصورة:');
+                if (prompt?.trim()) {
+                    userInput.value = prompt.trim();
+                    sendMessage();
+                }
+            });
+
+            clearBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 clearChat();
-                const confirmMsg = document.createElement('div');
-                confirmMsg.className = 'message';
-                confirmMsg.innerHTML = `
+                const msg = document.createElement('div');
+                msg.className = 'message bot';
+                msg.innerHTML = `
                     <div class="message-avatar bot">🧠</div>
-                    <div class="message-content" style="color:#6e6f82;font-style:italic;">
-                        ${currentLang === 'ar' ? 'تم مسح المحادثة ✨' : 'Chat cleared ✨'}
+                    <div class="message-content">
+                        <div class="text" style="color:#6e6f82;font-style:italic;">
+                            ✨ تم مسح المحادثة
+                        </div>
                     </div>
                 `;
-                chatArea.appendChild(confirmMsg);
+                chatArea.appendChild(msg);
                 chatArea.scrollTop = chatArea.scrollHeight;
                 setTimeout(() => {
-                    if (confirmMsg.parentNode) {
-                        confirmMsg.remove();
-                        if (chatArea.querySelectorAll('.message').length === 0) {
-                            if (welcomeMsg) welcomeMsg.style.display = 'flex';
-                        }
-                    }
+                    msg.remove();
+                    if (!chatArea.querySelector('.message')) welcomeMsg.style.display = 'flex';
                 }, 2000);
             });
 
@@ -706,8 +966,10 @@
 
             userInput.focus();
 
-            console.log('✅ Zeki Chat ready with Groq!');
-            console.log('📌 Model:', MODEL);
+            console.log('✅ زكي شات جاهز!');
+            console.log('🧠 المحادثة: Groq API');
+            console.log('🔍 البحث: Pinterest (مجاني)');
+            console.log('🖼️ التوليد: Agnes AI (مجاني للأبد)');
         }
 
         document.addEventListener('DOMContentLoaded', init);

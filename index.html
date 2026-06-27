@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zaki Chat </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zaki Chat</title>
     <style>
         * {
             margin: 0;
@@ -52,8 +52,22 @@
         }
 
         .logo-icon {
-            font-size: 32px;
-            filter: drop-shadow(0 0 10px rgba(79, 172, 254, 0.3));
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4facfe, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(79, 172, 254, 0.15);
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .header-title {
@@ -63,6 +77,12 @@
             background: linear-gradient(135deg, #4facfe, #00f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .header-status {
@@ -93,6 +113,30 @@
                 opacity: 0.4;
                 transform: scale(0.8);
             }
+        }
+
+        .lang-toggle {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e5e7eb;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-toggle:hover {
+            background: rgba(79, 172, 254, 0.15);
+            border-color: rgba(79, 172, 254, 0.3);
+        }
+
+        .lang-toggle .icon {
+            font-size: 16px;
         }
 
         .chat-area {
@@ -455,6 +499,22 @@
             transform: none;
         }
 
+        /* تنسيق خاص للغة الإنجليزية */
+        body[dir="ltr"] .container {
+            direction: ltr;
+        }
+
+        body[dir="ltr"] .header-title {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body[dir="ltr"] .message.user .message-content .text {
+            background: linear-gradient(135deg, rgba(16, 163, 127, 0.15), rgba(16, 163, 127, 0.05));
+            border-color: rgba(16, 163, 127, 0.1);
+        }
+
         @media (max-width: 640px) {
             body {
                 padding: 0;
@@ -466,9 +526,18 @@
             }
             .header {
                 padding: 10px 16px;
+                flex-wrap: wrap;
+                gap: 6px;
             }
             .header-title {
                 font-size: 18px;
+            }
+            .header-actions {
+                gap: 6px;
+            }
+            .lang-toggle {
+                font-size: 11px;
+                padding: 4px 10px;
             }
             .chat-area {
                 padding: 10px 14px;
@@ -532,6 +601,10 @@
             .header-status span:last-child {
                 display: none;
             }
+            .logo-icon {
+                width: 34px;
+                height: 34px;
+            }
         }
     </style>
 </head>
@@ -541,20 +614,28 @@
 
         <div class="header">
             <div class="header-left">
-                <span class="logo-icon">🧠</span>
+                <div class="logo-icon">
+                    <img src="https://i.ibb.co/cKvNqYvq/logo.png" alt="Zaki Logo" />
+                </div>
                 <span class="header-title">Zaki Chat</span>
             </div>
-            <div class="header-status">
-                <span class="status-dot"></span>
-                <span>جاهز</span>
+            <div class="header-actions">
+                <div class="header-status">
+                    <span class="status-dot"></span>
+                    <span id="statusText">جاهز</span>
+                </div>
+                <button class="lang-toggle" id="langToggle" title="تبديل اللغة">
+                    <span class="icon">🌐</span>
+                    <span id="langLabel">🇸🇦 عربي</span>
+                </button>
             </div>
         </div>
 
         <div class="chat-area" id="chatArea">
             <div class="welcome-msg" id="welcomeMsg">
-                <span class="big-icon"></span>
-                <h2>Welcome to Zaki Chat.</h2>
-                <p>Generating images and conversations using AI</p>
+                <span class="big-icon">🧠</span>
+                <h2 id="welcomeTitle">مرحباً في زكي شات</h2>
+                <p id="welcomeDesc">توليد الصور والمحادثات باستخدام الذكاء الاصطناعي</p>
             </div>
         </div>
 
@@ -569,12 +650,12 @@
 
         <div class="input-area">
             <div class="input-wrapper">
-                <input type="text" id="userInput" placeholder="Write the message." />
+                <input type="text" id="userInput" placeholder="اكتب الرسالة..." />
                 <div class="btn-group">
-                    <button class="btn-icon" id="imageBtn" title="توليد صورة"></button>
+                    <button class="btn-icon" id="imageBtn" title="توليد صورة">🖼️</button>
                     <button class="btn-icon" id="clearBtn" title="مسح المحادثة">🗑️</button>
                     <button class="btn-send" id="sendBtn">
-                        <span>Send</span>
+                        <span>إرسال</span>
                         <span>➤</span>
                     </button>
                 </div>
@@ -586,16 +667,77 @@
     <script>
         // ================================================================
         //  🧠  زكي شات - Groq للمحادثة + Pinterest + Agnes للصور
+        //  مع زر تبديل اللغة (عربي / إنجليزي)
         // ================================================================
 
         // ---- العناصر ----
         const chatArea = document.getElementById('chatArea');
         const welcomeMsg = document.getElementById('welcomeMsg');
+        const welcomeTitle = document.getElementById('welcomeTitle');
+        const welcomeDesc = document.getElementById('welcomeDesc');
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
         const imageBtn = document.getElementById('imageBtn');
         const clearBtn = document.getElementById('clearBtn');
         const typingIndicator = document.getElementById('typingIndicator');
+        const langToggle = document.getElementById('langToggle');
+        const langLabel = document.getElementById('langLabel');
+        const statusText = document.getElementById('statusText');
+
+        // ---- حالة اللغة ----
+        let currentLang = 'ar'; // 'ar' أو 'en'
+
+        // ---- النصوص متعددة اللغات ----
+        const LANG = {
+            ar: {
+                status: 'جاهز',
+                placeholder: 'اكتب الرسالة...',
+                send: 'إرسال',
+                welcomeTitle: 'مرحباً في زكي شات',
+                welcomeDesc: 'توليد الصور والمحادثات باستخدام الذكاء الاصطناعي',
+                langLabel: '🇸🇦 عربي',
+                clearMsg: '✨ تم مسح المحادثة',
+                error: '❌ عذراً، حدث خطأ.',
+                rateLimit: '⚠️ تجاوزت حد الطلبات. انتظر دقيقة وحاول مرة أخرى.',
+                apiKeyError: '❌ مشكلة في المفتاح. حاول مرة أخرى.',
+                imagePrompt: '📝 اكتب وصف الصورة:',
+                pinterestFound: '🔍 وجدت هذه الصورة على Pinterest',
+                agnesGenerated: '💡 لم أجدها على Pinterest، قمت بتوليدها لك',
+                agnesError: '⚠️ حدث خطأ في التوليد، لكن وجدت هذه الصورة كبديل',
+                download: '⬇️ تحميل الصورة',
+                open: '🔗 فتح في تبويب جديد',
+                copy: '📋 نسخ',
+                copied: '✅ تم!',
+                imageAlt: 'صورة',
+                sourcePinterest: 'Pinterest',
+                sourceAgnes: 'Agnes AI (تم التوليد)',
+                sourceFallback: 'Pinterest (بديل)',
+            },
+            en: {
+                status: 'Ready',
+                placeholder: 'Type a message...',
+                send: 'Send',
+                welcomeTitle: 'Welcome to Zaki Chat',
+                welcomeDesc: 'Generating images and conversations using AI',
+                langLabel: '🇬🇧 English',
+                clearMsg: '✨ Chat cleared',
+                error: '❌ Sorry, an error occurred.',
+                rateLimit: '⚠️ Rate limit exceeded. Wait a moment and try again.',
+                apiKeyError: '❌ API key issue. Please try again.',
+                imagePrompt: '📝 Describe the image:',
+                pinterestFound: '🔍 Found this image on Pinterest',
+                agnesGenerated: '💡 Not found on Pinterest, generated for you',
+                agnesError: '⚠️ Generation error, but found this alternative image',
+                download: '⬇️ Download',
+                open: '🔗 Open in new tab',
+                copy: '📋 Copy',
+                copied: '✅ Done!',
+                imageAlt: 'Image',
+                sourcePinterest: 'Pinterest',
+                sourceAgnes: 'Agnes AI (Generated)',
+                sourceFallback: 'Pinterest (Fallback)',
+            }
+        };
 
         // ---- مفاتيح API ----
         const GROQ_API_KEY = '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';
@@ -607,39 +749,72 @@
 
         let isProcessing = false;
 
-        // ================================================================
-        //  🔍  البحث في Pinterest (مجاني)
-        // ================================================================
+        // ---- تحديث الواجهة حسب اللغة ----
+        function updateLanguage(lang) {
+            const t = LANG[lang];
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+            statusText.textContent = t.status;
+            userInput.placeholder = t.placeholder;
+            sendBtn.querySelector('span:first-child').textContent = t.send;
+            welcomeTitle.textContent = t.welcomeTitle;
+            welcomeDesc.textContent = t.welcomeDesc;
+            langLabel.textContent = t.langLabel;
+
+            // تحديث كل الرسائل الموجودة (النصوص الثابتة)
+            document.querySelectorAll('.message .text').forEach(el => {
+                // نترك المحتوى الديناميكي كما هو، فقط نغير النصوص الثابتة إذا وجدت
+            });
+
+            // تحديث نصوص الأزرار في الصور إذا كانت موجودة
+            document.querySelectorAll('.image-actions .btn-download').forEach((btn, index) => {
+                if (index % 2 === 0) btn.innerHTML = `⬇️ ${t.download}`;
+                else btn.innerHTML = `🔗 ${t.open}`;
+            });
+
+            // تحديث رسالة الترحيب الثابتة
+            const welcomeMsgEl = document.getElementById('welcomeMsg');
+            if (welcomeMsgEl) {
+                const title = welcomeMsgEl.querySelector('h2');
+                const desc = welcomeMsgEl.querySelector('p');
+                if (title) title.textContent = t.welcomeTitle;
+                if (desc) desc.textContent = t.welcomeDesc;
+            }
+        }
+
+        // ---- تبديل اللغة ----
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            updateLanguage(currentLang);
+        }
+
+        // ---- البحث في Pinterest ----
         async function searchPinterest(query) {
             try {
-                // نستخدم واجهة بحث مجانية
-                const url = `https://pinterest-scraper-api.vercel.app/search?q=${encodeURIComponent(query)}&limit=5`;
+                const url =
+                `https://pinterest-scraper-api.vercel.app/search?q=${encodeURIComponent(query)}&limit=5`;
                 const response = await fetch(url);
-
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
                 if (data.results && data.results.length > 0) {
-                    // نرجع أول صورة موجودة
                     return {
                         found: true,
-                        imageUrl: data.results[0].images.orig || data.results[0].imageUrl,
+                        imageUrl: data.results[0].images?.orig || data.results[0].imageUrl,
                         source: 'Pinterest',
-                        title: data.results[0].title || 'صورة من Pinterest'
+                        title: data.results[0].title || 'Image from Pinterest'
                     };
                 }
                 return { found: false };
             } catch (error) {
-                console.error('❌ خطأ في البحث في Pinterest:', error);
+                console.error('Pinterest error:', error);
                 return { found: false, error: error.message };
             }
         }
 
-        // ================================================================
-        //  🖼️  توليد الصور باستخدام Agnes AI
-        // ================================================================
+        // ---- توليد الصور باستخدام Agnes AI ----
         async function generateImage(prompt) {
             try {
                 const response = await fetch(AGNES_IMAGE_URL, {
@@ -654,34 +829,26 @@
                         size: '1024x1024'
                     })
                 });
-
                 if (!response.ok) {
                     const error = await response.json().catch(() => ({}));
                     throw new Error(error.error?.message || `HTTP ${response.status}`);
                 }
-
                 const data = await response.json();
                 const imageUrl = data?.data?.[0]?.url;
-
-                if (!imageUrl) {
-                    throw new Error('مافي رابط صورة في الرد');
-                }
-
+                if (!imageUrl) throw new Error('No image URL in response');
                 return {
                     found: true,
                     imageUrl: imageUrl,
                     source: 'Agnes AI',
-                    title: 'تم التوليد بواسطة الذكاء الاصطناعي'
+                    title: 'Generated by AI'
                 };
             } catch (error) {
-                console.error('❌ خطأ في توليد الصورة:', error);
+                console.error('Agnes error:', error);
                 throw error;
             }
         }
 
-        // ================================================================
-        //  📨  عرض الرسائل
-        // ================================================================
+        // ---- عرض الرسائل ----
         function addMessage(type, content, isImage = false, imageData = null) {
             if (welcomeMsg) welcomeMsg.style.display = 'none';
 
@@ -695,40 +862,43 @@
             const contentDiv = document.createElement('div');
             contentDiv.className = 'message-content';
 
+            const t = LANG[currentLang];
+
             if (isImage && imageData) {
                 const container = document.createElement('div');
                 container.className = 'image-container';
 
-                // مصدر الصورة
                 const sourceDiv = document.createElement('div');
                 sourceDiv.className = 'image-source';
-                const sourceIcon = imageData.source === 'Pinterest' ? '📌' : '🧠';
-                sourceDiv.innerHTML = `${sourceIcon} المصدر: ${imageData.source}`;
+                let sourceLabel = imageData.source;
+                if (sourceLabel === 'Pinterest') sourceLabel = t.sourcePinterest;
+                else if (sourceLabel === 'Agnes AI') sourceLabel = t.sourceAgnes;
+                else if (sourceLabel === 'Pinterest (بديل)') sourceLabel = t.sourceFallback;
+                const sourceIcon = imageData.source.includes('Pinterest') ? '📌' : '🧠';
+                sourceDiv.innerHTML = `${sourceIcon} ${t.sourcePinterest === sourceLabel ? '📌' : '🧠'} ${t.sourcePinterest === sourceLabel ? t.sourcePinterest : t.sourceAgnes}`;
                 container.appendChild(sourceDiv);
 
-                // الصورة
                 const img = document.createElement('img');
                 img.src = imageData.imageUrl;
-                img.alt = 'الصورة';
+                img.alt = t.imageAlt;
                 img.loading = 'lazy';
                 img.style.opacity = '0';
                 img.onload = () => { img.style.opacity = '1'; };
                 img.onerror = () => {
                     container.innerHTML = `
                         <div style="padding:30px;text-align:center;color:#6e6f82;">
-                            ❌ فشل تحميل الصورة
+                            ❌ ${t.error}
                         </div>
                     `;
                 };
                 container.appendChild(img);
 
-                // أزرار الإجراءات
                 const actionsDiv = document.createElement('div');
                 actionsDiv.className = 'image-actions';
 
                 const downloadBtn = document.createElement('button');
                 downloadBtn.className = 'btn-download';
-                downloadBtn.innerHTML = '⬇️ تحميل الصورة';
+                downloadBtn.innerHTML = `⬇️ ${t.download}`;
                 downloadBtn.onclick = () => {
                     const link = document.createElement('a');
                     link.href = imageData.imageUrl;
@@ -741,7 +911,7 @@
 
                 const openBtn = document.createElement('button');
                 openBtn.className = 'btn-download';
-                openBtn.innerHTML = '🔗 فتح في تبويب جديد';
+                openBtn.innerHTML = `🔗 ${t.open}`;
                 openBtn.onclick = () => {
                     window.open(imageData.imageUrl, '_blank');
                 };
@@ -750,16 +920,14 @@
                 actionsDiv.appendChild(openBtn);
                 container.appendChild(actionsDiv);
 
-                // النص الوصفي
                 const promptText = document.createElement('div');
                 promptText.className = 'image-prompt';
-                promptText.textContent = `🖼️ ${imageData.title || 'صورة'}`;
+                promptText.textContent = `🖼️ ${imageData.title || t.imageAlt}`;
 
                 contentDiv.appendChild(container);
                 contentDiv.appendChild(promptText);
 
             } else {
-                // عرض النص
                 const textDiv = document.createElement('div');
                 textDiv.className = 'text';
                 textDiv.innerHTML = content;
@@ -771,12 +939,12 @@
 
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'btn-action';
-                    copyBtn.innerHTML = '📋 نسخ';
+                    copyBtn.innerHTML = t.copy;
                     copyBtn.onclick = () => {
                         const txt = textDiv.textContent || textDiv.innerText;
                         navigator.clipboard?.writeText(txt);
-                        copyBtn.innerHTML = '✅ تم!';
-                        setTimeout(() => copyBtn.innerHTML = '📋 نسخ', 2000);
+                        copyBtn.innerHTML = t.copied;
+                        setTimeout(() => copyBtn.innerHTML = t.copy, 2000);
                     };
 
                     actions.appendChild(copyBtn);
@@ -787,7 +955,6 @@
             messageDiv.appendChild(avatar);
             messageDiv.appendChild(contentDiv);
             chatArea.appendChild(messageDiv);
-
             chatArea.scrollTop = chatArea.scrollHeight;
         }
 
@@ -796,12 +963,11 @@
             if (welcomeMsg) welcomeMsg.style.display = 'flex';
         }
 
-        // ================================================================
-        //  🧠  الاتصال بـ Groq (للمحادثة)
-        // ================================================================
+        // ---- الاتصال بـ Groq ----
         async function callGroq(prompt) {
-            const systemPrompt =
-                'أنت مساعد ذكي اسمك "زكي". ترد دائماً باللغة العربية الفصحى. ساعد المستخدم في أي سؤال.';
+            const systemPrompt = currentLang === 'ar' ?
+                'أنت مساعد ذكي اسمك "زكي". ترد دائماً باللغة العربية الفصحى. ساعد المستخدم في أي سؤال.' :
+                'You are a smart assistant named "Zaki". Always respond in English. Help the user with any question.';
 
             const res = await fetch(GROQ_API_URL, {
                 method: 'POST',
@@ -827,13 +993,11 @@
 
             const data = await res.json();
             const reply = data?.choices?.[0]?.message?.content;
-            if (!reply) throw new Error('لم أستطع توليد رد');
+            if (!reply) throw new Error('No reply generated');
             return reply;
         }
 
-        // ================================================================
-        //  🚀  إرسال الرسالة
-        // ================================================================
+        // ---- إرسال الرسالة ----
         async function sendMessage() {
             const text = userInput.value.trim();
             if (!text) {
@@ -843,6 +1007,7 @@
             }
             if (isProcessing) return;
 
+            const t = LANG[currentLang];
             const isImageRequest = /صوره|صورة|ارسم|رسم|توليد|انشاء|image|picture|draw|generate|create/i.test(text);
 
             addMessage('user', text);
@@ -857,52 +1022,45 @@
 
             try {
                 if (isImageRequest) {
-                    // 1. نبحث في Pinterest
                     const pinterestResult = await searchPinterest(text);
-
                     if (pinterestResult.found) {
-                        // الصورة موجودة في Pinterest
-                        addMessage('bot', '🔍 وجدت هذه الصورة على Pinterest', true, {
+                        addMessage('bot', t.pinterestFound, true, {
                             imageUrl: pinterestResult.imageUrl,
                             source: 'Pinterest',
-                            title: pinterestResult.title || 'صورة من Pinterest'
+                            title: pinterestResult.title || 'Image from Pinterest'
                         });
                     } else {
-                        // 2. مش موجودة في Pinterest → نولدها بـ Agnes
                         const agnesResult = await generateImage(text);
-                        addMessage('bot', '💡 لم أجدها على Pinterest، قمت بتوليدها لك', true, {
+                        addMessage('bot', t.agnesGenerated, true, {
                             imageUrl: agnesResult.imageUrl,
-                            source: 'Agnes AI (تم التوليد)',
+                            source: 'Agnes AI',
                             title: text
                         });
                     }
                 } else {
-                    // محادثة عادية
                     const reply = await callGroq(text);
                     addMessage('bot', reply);
                 }
             } catch (err) {
-                console.error('❌ خطأ:', err);
-                let msg = '❌ عذراً، حدث خطأ.';
-                if (err.message.includes('rate')) msg = '⚠️ تجاوزت حد الطلبات. انتظر دقيقة وحاول مرة أخرى.';
-                else if (err.message.includes('API key')) msg = '❌ مشكلة في المفتاح. حاول مرة أخرى.';
+                console.error('Error:', err);
+                let msg = t.error;
+                if (err.message.includes('rate')) msg = t.rateLimit;
+                else if (err.message.includes('API key')) msg = t.apiKeyError;
                 else msg = `❌ ${err.message}`;
 
-                // لو فشل التوليد، نحاول نرجع صورة بديلة من Pinterest
                 if (isImageRequest) {
                     try {
-                        const fallback = await searchPinterest('طبيعة');
+                        const fallback = await searchPinterest('nature');
                         if (fallback.found) {
-                            addMessage('bot', '⚠️ حدث خطأ في التوليد، لكن وجدت هذه الصورة كبديل', true, {
+                            addMessage('bot', t.agnesError, true, {
                                 imageUrl: fallback.imageUrl,
                                 source: 'Pinterest (بديل)',
-                                title: 'صورة بديلة'
+                                title: 'Alternative image'
                             });
                             return;
                         }
-                    } catch (e) { /* نتجاهل */ }
+                    } catch (e) { /* ignore */ }
                 }
-
                 addMessage('bot', msg);
             } finally {
                 isProcessing = false;
@@ -912,10 +1070,16 @@
             }
         }
 
-        // ================================================================
-        //  🎯  الأحداث
-        // ================================================================
+        // ---- الأحداث ----
         function init() {
+            // اللغة الافتراضية
+            updateLanguage('ar');
+
+            langToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleLanguage();
+            });
+
             sendBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 sendMessage();
@@ -931,7 +1095,8 @@
             imageBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 if (isProcessing) return;
-                const prompt = prompt('📝 اكتب وصف الصورة:');
+                const t = LANG[currentLang];
+                const prompt = prompt(t.imagePrompt);
                 if (prompt?.trim()) {
                     userInput.value = prompt.trim();
                     sendMessage();
@@ -941,13 +1106,14 @@
             clearBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 clearChat();
+                const t = LANG[currentLang];
                 const msg = document.createElement('div');
                 msg.className = 'message bot';
                 msg.innerHTML = `
                     <div class="message-avatar bot">🧠</div>
                     <div class="message-content">
                         <div class="text" style="color:#6e6f82;font-style:italic;">
-                            ✨ تم مسح المحادثة
+                            ${t.clearMsg}
                         </div>
                     </div>
                 `;
@@ -966,10 +1132,11 @@
 
             userInput.focus();
 
-            console.log('✅ زكي شات جاهز!');
-            console.log('🧠 المحادثة: Groq API');
-            console.log('🔍 البحث: Pinterest (مجاني)');
-            console.log('🖼️ التوليد: Agnes AI (مجاني للأبد)');
+            console.log('✅ Zaki Chat ready!');
+            console.log('🧠 Conversation: Groq API');
+            console.log('🔍 Search: Pinterest (free)');
+            console.log('🖼️ Generation: Agnes AI (free)');
+            console.log('🌐 Language toggle: Arabic / English');
         }
 
         document.addEventListener('DOMContentLoaded', init);
